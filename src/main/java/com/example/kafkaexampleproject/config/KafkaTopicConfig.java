@@ -7,6 +7,7 @@ import org.springframework.kafka.config.TopicBuilder;
 
 @Configuration
 public class KafkaTopicConfig {
+
     @Bean
     public NewTopic kafkaStringTopicBuilder(){
         return TopicBuilder.name("tryingout")
@@ -22,4 +23,5 @@ public class KafkaTopicConfig {
                 .replicas(1)
                 .build();
     }
+
 }

@@ -1,5 +1,6 @@
 package com.example.kafkaexampleproject.config;
 
+import com.example.kafkaexampleproject.constants.ConstantValues;
 import com.example.kafkaexampleproject.model.User;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
@@ -17,9 +18,8 @@ import org.springframework.kafka.support.serializer.JsonSerializer;
 import java.util.HashMap;
 import java.util.Map;
 
-public class KafkaConsumerConfig {
-    @Value("${spring.kafka.bootstrap-servers}")
-    private String bootstrapServers;
+public class KafkaConsumerConfig{
+    private String bootstrapServers = ConstantValues.bootstrapServers;
 
     public Map<String, Object> consumerConfig(){
         Map<String, Object> props = new HashMap<>();
@@ -46,8 +46,8 @@ public class KafkaConsumerConfig {
     }
 
     @Bean
-    public KafkaListenerContainerFactory<ConcurrentMessageListenerContainer<String, User>> userKafkaListenerFactory(){
-        ConcurrentKafkaListenerContainerFactory<String, User> factory = new ConcurrentKafkaListenerContainerFactory<>();
+    public KafkaListenerContainerFactory<ConcurrentMessageListenerContainer<String,User>> userKafkaListenerFactory(){
+        ConcurrentKafkaListenerContainerFactory<String,User> factory = new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(consumerFactoryUserObject());
         return factory;
     }

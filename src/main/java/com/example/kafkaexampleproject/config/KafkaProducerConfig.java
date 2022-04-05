@@ -1,5 +1,6 @@
 package com.example.kafkaexampleproject.config;
 
+import com.example.kafkaexampleproject.constants.ConstantValues;
 import com.example.kafkaexampleproject.model.User;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
@@ -15,9 +16,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Configuration
-public class KafkaProducerConfig {
-    @Value("${spring.kafka.bootstrap-servers}")
-    private String bootstrapServers;
+public class KafkaProducerConfig<T> {
+    private String bootstrapServers = ConstantValues.bootstrapServers;
 
 
     public Map<String, Object> producerConfig(Object keySerializer, Object valueSerializer){
@@ -39,12 +39,12 @@ public class KafkaProducerConfig {
     }
 
     @Bean
-    public ProducerFactory<String, User> producerFactoryUser(){
+    public ProducerFactory<String, T> producerFactoryUser(){
         return new DefaultKafkaProducerFactory<>(producerConfig(StringSerializer.class, JsonSerializer.class));
     }
 
     @Bean
-    public KafkaTemplate<String, User> kafkaTemplateUser(){
+    public KafkaTemplate<String, T> kafkaTemplateUser(){
         return new KafkaTemplate<>(producerFactoryUser());
     }
 

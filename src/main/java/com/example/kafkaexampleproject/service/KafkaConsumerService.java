@@ -4,8 +4,9 @@ import com.example.kafkaexampleproject.constants.ConstantValues;
 import com.example.kafkaexampleproject.model.User;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-@Component
+@Service
 public class KafkaConsumerService {
 
     @KafkaListener(topics = ConstantValues.topicNameString, groupId = ConstantValues.groupId)
