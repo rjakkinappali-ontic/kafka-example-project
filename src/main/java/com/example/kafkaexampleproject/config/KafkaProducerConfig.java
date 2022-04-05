@@ -39,12 +39,12 @@ public class KafkaProducerConfig<T> {
     }
 
     @Bean
-    public ProducerFactory<String, T> producerFactoryUser(){
+    public ProducerFactory<String, User> producerFactoryUser(){
         return new DefaultKafkaProducerFactory<>(producerConfig(StringSerializer.class, JsonSerializer.class));
     }
 
     @Bean
-    public KafkaTemplate<String, T> kafkaTemplateUser(){
+    public KafkaTemplate<String, User> kafkaTemplateUser(){
         return new KafkaTemplate<>(producerFactoryUser());
     }
 

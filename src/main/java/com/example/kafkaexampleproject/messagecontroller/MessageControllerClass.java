@@ -17,12 +17,12 @@ public class MessageControllerClass {
     private KafkaTopicConfig kafkaTopicConfig;
 
     @PostMapping("/publishString")
-    public void publishString(@RequestParam(value = "message") String message, @RequestParam(value = "topicName") String topicName){
+    public void publishString(@RequestParam(value = "message") String message){
         kafkaProducerService.sendMessage(message);
     }
 
     @PostMapping("/publishUser")
-    public void publishUser(@RequestParam(value = "id") int id, @RequestParam(value = "name") String name, @RequestParam(value = "topicName") String topicName){
+    public void publishUser(@RequestParam(value = "id") int id, @RequestParam(value = "name") String name){
         User user = new User();
         user.setId(id);
         user.setFirstName(name);
